@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>  
+ 
+   <!-- Base Define -->
+   <definition name="base.definition" 
+       template="/WEB-INF/layouts/classic.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/basefragments/_header.jsp" />  
+       <put-attribute name="menu" value="/WEB-INF/basefragments/_menu.jsp" />  
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/basefragments/_footer.jsp" />  
+   </definition>  
+ 
+   <!-- Home Page -->
+   <definition name="welcomePage" extends="base.definition">  
+       <put-attribute name="title" value="Home Page" />  
+       <put-attribute name="body" value="/WEB-INF/bodyfragments/welcomePage.jsp" />  
+   </definition>  
+      
+   <!-- ContactUs Page -->
+   <definition name="contactusPage" extends="base.definition">  
+       <put-attribute name="title" value="Contact Us" />  
+       <put-attribute name="body" value="/WEB-INF/bodyfragments/_contactus.jsp" />  
+   </definition>  
+   
+   <definition name="loginPage" extends="base.definition">  
+       <put-attribute name="title" value="Login" />  
+       <put-attribute name="body" value="/WEB-INF/pages/loginPage.jsp" />  
+   </definition>  
+   
+   <definition name="userInfoPage" extends="base.definition">  
+       <put-attribute name="title" value="User Info" />  
+       <put-attribute name="body" value="/WEB-INF/pages/userInfoPage.jsp" />  
+   </definition>
+   
+   <definition name="logoutSuccessfulPage" extends="base.definition">  
+       <put-attribute name="title" value="Logout Successful" />  
+       <put-attribute name="body" value="/WEB-INF/pages/logoutSuccessfulPage.jsp" />  
+   </definition>
+   
+   <definition name="smartphoneList" extends="base.definition">  
+       <put-attribute name="title" value="Smartphone List" />  
+       <put-attribute name="body" value="/WEB-INF/pages/smartphoneList.jsp" />  
+   </definition>
+      
+   <definition name="formSmartphone" extends="base.definition">  
+       <put-attribute name="title" value="Edit Smartphone" />  
+       <put-attribute name="body" value="/WEB-INF/pages/formSmartphone.jsp" />  
+   </definition>
+   
+    <definition name="403Page" extends="base.definition">  
+       <put-attribute name="title" value="403 Page" />  
+       <put-attribute name="body" value="/WEB-INF/pages/403Page.jsp" />  
+   </definition>
+ 
+</tiles-definitions>
