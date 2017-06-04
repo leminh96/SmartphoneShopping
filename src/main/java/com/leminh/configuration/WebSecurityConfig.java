@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//Login request
 		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 		// For ADMIN only.
-		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/deleteSmartphone", "/editSmartphone", "/createSmartphone").access("hasRole('ROLE_ADMIN')");
 		// User can't access
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		// Login form configuration

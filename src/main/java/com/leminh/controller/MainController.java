@@ -30,11 +30,9 @@ public class MainController {
 	@Autowired
 	private SmartphoneValidator smartphoneValidator;
 
-	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "welcomePage";
+		return "loginPage";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -49,8 +47,7 @@ public class MainController {
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
-		model.addAttribute("title", "Logout");
-		return "logoutSuccessfulPage";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
@@ -62,14 +59,6 @@ public class MainController {
 		return "userInfoPage";
 	}
 	
-	@RequestMapping(value = { "/contactus" }, method = RequestMethod.GET)
-    public String contactusPage(Model model) {
-        model.addAttribute("address", "Vietnam");
-        model.addAttribute("phone", "01692422284");
-        model.addAttribute("email", "quocminh97@gmail.com");
-        return "contactusPage";
-    }
-
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
 		if (principal != null) {
@@ -148,7 +137,6 @@ public class MainController {
 		if (result.hasErrors()) {
 			return this.formSmartphone(model, smartphoneInfo);
 		}
-
 		this.smartphoneDAO.saveSmartphone(smartphoneInfo);
 		redirectAttributes.addFlashAttribute("message", "Save Smartphone Successful");
 		return "redirect:/smartphoneList";

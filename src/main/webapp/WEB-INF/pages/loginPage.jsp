@@ -1,19 +1,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Open+Sans:600">
-<link rel="stylesheet" href="../css/loginstyle.css">
 <title>Login</title>
+<link rel="stylesheet" type="text/css"
+    href="${pageContext.request.contextPath}/styles/loginstyle.css">
 </head>
 <body>
-	<h1>Login</h1>
 	<c:if test="${param.error == 'true'}">
 		<div style="color: red; margin: 10px 0px;">
 			Login Failed!!!<br /> Reason :
 			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</div>
 	</c:if>
-	<h3>Enter user name and password:</h3>
 	<form name='f'
 		action="${pageContext.request.contextPath}/j_spring_security_check"
 		method='POST'>

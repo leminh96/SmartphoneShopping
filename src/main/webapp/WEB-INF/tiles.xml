@@ -19,15 +19,11 @@
        <put-attribute name="title" value="Home Page" />  
        <put-attribute name="body" value="/WEB-INF/bodyfragments/welcomePage.jsp" />  
    </definition>  
-      
-   <!-- ContactUs Page -->
-   <definition name="contactusPage" extends="base.definition">  
-       <put-attribute name="title" value="Contact Us" />  
-       <put-attribute name="body" value="/WEB-INF/bodyfragments/_contactus.jsp" />  
-   </definition>  
    
    <definition name="loginPage" extends="base.definition">  
-       <put-attribute name="title" value="Login" />  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="menu" value=""/>
+       <put-attribute name="header" value="" />
        <put-attribute name="body" value="/WEB-INF/pages/loginPage.jsp" />  
    </definition>  
    
@@ -36,10 +32,7 @@
        <put-attribute name="body" value="/WEB-INF/pages/userInfoPage.jsp" />  
    </definition>
    
-   <definition name="logoutSuccessfulPage" extends="base.definition">  
-       <put-attribute name="title" value="Logout Successful" />  
-       <put-attribute name="body" value="/WEB-INF/pages/logoutSuccessfulPage.jsp" />  
-   </definition>
+   
    
    <definition name="smartphoneList" extends="base.definition">  
        <put-attribute name="title" value="Smartphone List" />  
