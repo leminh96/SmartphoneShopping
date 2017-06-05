@@ -3,6 +3,8 @@ package com.leminh.controller;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.leminh.dao.SmartphoneDAO;
+import com.leminh.dao.UserInfoDAO;
+import com.leminh.entity.User;
 import com.leminh.validator.SmartphoneValidator;
 import com.leminh.model.SmartphoneInfo;
+import com.leminh.model.UserInfo;
 
 @Controller
 @Transactional
@@ -28,11 +33,40 @@ public class MainController {
 	private SmartphoneDAO smartphoneDAO;
 
 	@Autowired
+	private UserInfoDAO userInfoDAO;
+
+	@Autowired
 	private SmartphoneValidator smartphoneValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder dataBinder) {
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == SmartphoneInfo.class) {
+			dataBinder.setValidator(smartphoneValidator);
+		}
+	}
+	
+	@ModelAttribute
+	public void sendUserInfo(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        User u = userInfoDAO.findUserByUsername(userName);
+        model.addAttribute("buget", u);
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
 		return "loginPage";
+	}
+	
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String homePage(Model model) {
+		return "welcomePage";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -50,15 +84,14 @@ public class MainController {
 		return "redirect:/login";
 	}
 
-	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-	public String userInfo(Model model, Principal principal) {
-		String userName = principal.getName();
-		List<SmartphoneInfo> list = smartphoneDAO.listSmartphoneInfos();
-		model.addAttribute("smartphoneInfos", list);
-		System.out.println("User Name: " + userName);
+	@RequestMapping(value = "/userInfo")
+	public String userInfos(Model model, @RequestParam(value = "username", required = true) String username) {
+		User user = null;
+		user = this.userInfoDAO.findUserByUsername(username);
+		model.addAttribute("userInfos", user);
 		return "userInfoPage";
 	}
-	
+
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
 		if (principal != null) {
@@ -85,7 +118,6 @@ public class MainController {
 		} else {
 			model.addAttribute("formTitle", "Edit Smartphone");
 		}
-
 		return "formSmartphone";
 	}
 
@@ -116,18 +148,6 @@ public class MainController {
 		return "redirect:/smartphoneList";
 	}
 
-	@InitBinder
-	protected void initBinder(WebDataBinder dataBinder) {
-		Object target = dataBinder.getTarget();
-		if (target == null) {
-			return;
-		}
-		System.out.println("Target=" + target);
-
-		if (target.getClass() == SmartphoneInfo.class) {
-			dataBinder.setValidator(smartphoneValidator);
-		}
-	}
 
 	@RequestMapping(value = "/saveSmartphone", method = RequestMethod.POST)
 	public String saveSmartphone(Model model,
@@ -140,6 +160,6 @@ public class MainController {
 		this.smartphoneDAO.saveSmartphone(smartphoneInfo);
 		redirectAttributes.addFlashAttribute("message", "Save Smartphone Successful");
 		return "redirect:/smartphoneList";
-
 	}
+
 }

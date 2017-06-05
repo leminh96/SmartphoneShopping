@@ -8,43 +8,40 @@
 <title>${formTitle}</title>
 </head>
 <body>
-	<form:form action="loadUser" method="GET"
-		modelAttribute="userForm">
-		<section class="content">
-			<div class="row">
-				<div class="box box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">${formTitle}</h3>
+	<section class="content">
+		<div class="row">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">${formTitle}</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label>Full Name</label> <input type="text" class="form-control"
+							value="${buget.name}" readonly/>
 					</div>
-					<div class="box-body">
-						<div class="form-group">
-							<label>Full Name</label>
-							<form:input path="name" name="" type="text" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label>Address</label>
-							<form:input path="address" type="text" class="form-control" />							
-						</div>
-						<div class="form-group">
-							<label>Birthday</label>
-							<form:input path="birthday" type="text" class="form-control"/>							
-						</div>
-						<div class="form-group">
-							<label>Sex</label>
-							<form:input path="sex" type="text" class="form-control"/>							
-						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<form:input path="email" type="text" class="form-control"/>							
-						</div>
-						<div class="form-group">
-							<label>Phone</label>
-							<form:input path="phone" type="text" class="form-control"/>							
-						</div>
+					<div class="form-group">
+						<label>Address</label> <input type="text" class="form-control"
+							value="${buget.address}" readonly/>
+					</div>
+					<div class="form-group">
+						<label>Birthday</label> <input type="text" class="form-control"
+							value="${buget.birthday}" readonly/>
+					</div>
+					<div class="form-group">
+						<label>Sex</label> <input type="text" class="form-control"
+							value="${buget.sex}" readonly/>
+					</div>
+					<div class="form-group">
+						<label>Email</label> <input type="text" class="form-control"
+							value="${buget.email}" readonly/>
+					</div>
+					<div class="form-group">
+						<label>Phone</label> <input type="text" class="form-control"
+							value="${buget.phone}" readonly/>
 					</div>
 				</div>
 			</div>
-		</section>
-	</form:form>
+		</div>
+	</section>
 </body>
 </html>

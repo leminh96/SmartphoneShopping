@@ -30,9 +30,7 @@
    <definition name="userInfoPage" extends="base.definition">  
        <put-attribute name="title" value="User Info" />  
        <put-attribute name="body" value="/WEB-INF/pages/userInfoPage.jsp" />  
-   </definition>
-   
-   
+   </definition>   
    
    <definition name="smartphoneList" extends="base.definition">  
        <put-attribute name="title" value="Smartphone List" />  

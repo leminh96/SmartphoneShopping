@@ -1,6 +1,6 @@
 <a href="" class="logo"> 
 	<span class="logo-mini"><b>S</b>M</span> 
-	<span class="logo-lg"></b>Smartphone Manager</b></span>
+	<span class="logo-lg"><b>Smartphone Manager</b></span>
 </a>
 
 <nav class="navbar navbar-static-top">

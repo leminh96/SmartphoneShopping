@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section class="sidebar">
 	<div class="user-panel">
 		<div class="pull-left image">
@@ -24,7 +25,7 @@
 	<ul class="sidebar-menu">
 		<li class="header">MAIN NAVIGATION</li>
 		<li class="treeview">
-		<a href="${pageContext.request.contextPath}/userInfo"> <i class="fa fa-dashboard"></i>
+		<a href="${pageContext.request.contextPath}/userInfo?username=${buget.userName}"> <i class="fa fa-dashboard"></i>
 				<span>User Infomation</span>
 		</a></li>
 		
