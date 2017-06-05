@@ -65,7 +65,7 @@ public class Smartphone{
 		this.year = year;
 	}
 
-	@Column(name = "detail", length = 500, nullable = false)
+	@Column(name = "detail", length = 500)
 	public String getDetail() {
 		return detail;
 	}
@@ -74,7 +74,7 @@ public class Smartphone{
 		this.detail = detail;
 	}
 
-	@Column(name = "image", length = 200, nullable = false)
+	@Column(name = "image", length = 200)
 	public String getImage() {
 		return image;
 	}

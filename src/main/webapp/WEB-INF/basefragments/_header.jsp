@@ -15,7 +15,7 @@
 			<li class="dropdown user user-menu"><a href="#"
 				class="dropdown-toggle" data-toggle="dropdown"> <img
 					src="${pageContext.request.contextPath}/img/leminh.jpg" class="user-image" alt="User Image">
-					<span class="hidden-xs">1412320</span>
+					<span class="hidden-xs">${buget.name}</span>
 			</a>
 				<ul class="dropdown-menu">
 					<!-- User image -->
@@ -23,7 +23,7 @@
 						class="img-circle" alt="User Image">
 
 						<p>
-							1412320 - Web Developer <small>Member since April. 2017</small>
+							${buget.name} - Web Developer <small>Member since April. 2017</small>
 						</p></li>
 					
 					<li class="user-body">

@@ -2,6 +2,9 @@ package com.leminh.controller;
 
 import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +26,6 @@ import com.leminh.dao.UserInfoDAO;
 import com.leminh.entity.User;
 import com.leminh.validator.SmartphoneValidator;
 import com.leminh.model.SmartphoneInfo;
-import com.leminh.model.UserInfo;
 
 @Controller
 @Transactional
@@ -37,7 +39,7 @@ public class MainController {
 
 	@Autowired
 	private SmartphoneValidator smartphoneValidator;
-	
+
 	@InitBinder
 	protected void initBinder(WebDataBinder dataBinder) {
 		Object target = dataBinder.getTarget();
@@ -50,20 +52,20 @@ public class MainController {
 			dataBinder.setValidator(smartphoneValidator);
 		}
 	}
-	
+
 	@ModelAttribute
-	public void sendUserInfo(Model model){
+	public void sendUserInfo(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        User u = userInfoDAO.findUserByUsername(userName);
-        model.addAttribute("buget", u);
+		String userName = auth.getName();
+		User u = userInfoDAO.findUserByUsername(userName);
+		model.addAttribute("buget", u);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
 		return "loginPage";
 	}
-	
+
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String homePage(Model model) {
 		return "welcomePage";
@@ -148,7 +150,6 @@ public class MainController {
 		return "redirect:/smartphoneList";
 	}
 
-
 	@RequestMapping(value = "/saveSmartphone", method = RequestMethod.POST)
 	public String saveSmartphone(Model model,
 			@ModelAttribute("smartphoneForm") @Validated SmartphoneInfo smartphoneInfo, BindingResult result,
@@ -162,4 +163,18 @@ public class MainController {
 		return "redirect:/smartphoneList";
 	}
 
+	@RequestMapping(value = "/multiDelete", method = RequestMethod.POST)
+	public String multiDelete(HttpServletRequest request, Model model) {
+		try {
+			if (request.getParameterValues("id") != null)
+				for (String id : request.getParameterValues("id"))
+				{			
+					this.smartphoneDAO.deleteSmartphone(Integer.parseInt(id));
+				}		
+			return "redirect:/smartphoneList";
+		}
+		catch (Exception e) {
+			return "redirect:/smartphoneList";
+		}
+	}
 }

@@ -6,7 +6,7 @@
 				alt="User Image">
 		</div>
 		<div class="pull-left info">
-			<p>Admin 1412320</p>
+			<p>${buget.name}</p>
 			<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 		</div>
 	</div>
