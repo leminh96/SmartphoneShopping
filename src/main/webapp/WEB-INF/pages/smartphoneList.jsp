@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section class="content">
 	<div class="row">
 		<div class="col-xs-12">
@@ -25,15 +26,14 @@
 							<tbody>
 								<c:forEach items="${smartphoneInfos}" var="info">
 									<tr>
-										<td><input type=checkbox name="id"
-											value="${info.id}" /></td>
+										<td><input type=checkbox name="id" value="${info.id}" /></td>
 										<td>${info.name}</td>
 										<td>${info.brand}</td>
 										<td>${info.price}</td>
 										<td>${info.year}</td>
-										<td>${info.detail}</td>
-										<td><a href="deleteSmartphone?id=${info.id}">Delete</a></td>
+										<td>${info.detail}</td>										
 										<td><a href="editSmartphone?id=${info.id}">Edit</a></td>
+										<td><a href="deleteSmartphone?id=${info.id}">Delete</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -50,8 +50,9 @@
 								</tr>
 							</tfoot>
 						</table>
-						<input type="submit" class="btn btn-danger"
-							value="Multiple Delete" />
+											
+							<input type="submit" class="btn btn-danger"
+								value="Multiple Delete" />						
 					</form:form>
 				</div>
 			</div>

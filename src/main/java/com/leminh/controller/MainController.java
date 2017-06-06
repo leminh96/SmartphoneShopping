@@ -77,8 +77,11 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage(Model model) {
-		return "loginPage";
+	public String loginPage(Model model, Principal principal) {
+		if (principal == null) {
+			return "loginPage";
+		}
+		return "redirect:/welcome";
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
@@ -138,7 +141,6 @@ public class MainController {
 		if (smartphoneInfo == null) {
 			return "redirect:/smartphoneList";
 		}
-
 		return this.formSmartphone(model, smartphoneInfo);
 	}
 
@@ -153,11 +155,12 @@ public class MainController {
 	@RequestMapping(value = "/saveSmartphone", method = RequestMethod.POST)
 	public String saveSmartphone(Model model,
 			@ModelAttribute("smartphoneForm") @Validated SmartphoneInfo smartphoneInfo, BindingResult result,
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes, Principal principal) {
 
 		if (result.hasErrors()) {
 			return this.formSmartphone(model, smartphoneInfo);
 		}
+		
 		this.smartphoneDAO.saveSmartphone(smartphoneInfo);
 		redirectAttributes.addFlashAttribute("message", "Save Smartphone Successful");
 		return "redirect:/smartphoneList";
@@ -167,13 +170,11 @@ public class MainController {
 	public String multiDelete(HttpServletRequest request, Model model) {
 		try {
 			if (request.getParameterValues("id") != null)
-				for (String id : request.getParameterValues("id"))
-				{			
+				for (String id : request.getParameterValues("id")) {
 					this.smartphoneDAO.deleteSmartphone(Integer.parseInt(id));
-				}		
+				}
 			return "redirect:/smartphoneList";
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return "redirect:/smartphoneList";
 		}
 	}

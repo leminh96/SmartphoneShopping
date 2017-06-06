@@ -6,6 +6,7 @@
 <title>${title}</title>
 </head>
 <body>
-	<h1>Message : ${message}</h1>
+	<h1>Welcome to Smartphone Shopping Website</h1>
+	<img src="${pageContext.request.contextPath}/img/smartphone.jpg">
 </body>
 </html>
